@@ -1,0 +1,11 @@
+With Elba
+=========
+
+.. raw:: html
+
+    <ul><li><a href="../index.html"><b>Go Back</b></a></li></ul>
+
+.. note:: Click on the ``[source]`` link to see the docstring that generated this.
+
+.. automodule:: with_elba
+   :members:
