@@ -11,5 +11,5 @@ extensions = [
     "elba",
 ]
 
-autodoc_typehints = "source"
+autodoc_typehints = "description"
 napoleon_numpy_docstring = True
