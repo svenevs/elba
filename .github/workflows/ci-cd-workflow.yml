@@ -1,0 +1,81 @@
+name: elba CI-CD
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ["ubuntu-latest"]
+        python-version: [3.7, 3.8, 3.9, 3.10, 3.11]
+        sphinx-version: ["<6", "<7", ">=6"]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install test dependencies
+      run: |
+        pip install --upgrade --user pip wheel
+        pip install .[tests] 'sphinx ${{ matrix.sphinx-version }}'
+        pip freeze
+    - name: Test with pytest (${{ runner.os }}), python ${{ matrix.python-version }}, sphinx ${{ matrix.sphinx-version }}
+      run: |
+          pytest tests -r a
+
+  create-dist:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip wheel
+        pip install .[dev]
+    - name: Create package
+      run: |
+        python3 -m build
+        twine check dist/*
+    - uses: actions/upload-artifact@v3
+      if: startsWith(github.ref, 'refs/tags/v')
+      with:
+        name: dist
+        path: dist
+
+  # can deploy to PyPI with this, might need to work out what to do with name
+  # clash first
+  # deploy-pypi:
+  #   if: startsWith(github.ref, 'refs/tags/v')
+  #   needs: [build,create-dist]
+
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       python-version: [3.9]
+
+  #   steps:
+  #   - uses: actions/download-artifact@v3
+  #     with:
+  #       name: dist
+  #       path: dist
+  #   - name: Publish package to PyPI
+  #     uses: pypa/gh-action-pypi-publish@release/v1
+  #     with:
+  #       user: __token__
+  #       password: ${{ secrets.pypi_password }}
