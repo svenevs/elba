@@ -8,8 +8,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
-    "sphinx_autodoc_typehints",
     "elba",
 ]
 
+autodoc_typehints = "source"
 napoleon_numpy_docstring = True
