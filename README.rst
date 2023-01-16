@@ -46,8 +46,8 @@ docstrings.  This requires using Sphinx 3.0 or later.  In your ``conf.py``:
 |         Returns                        |         Returns                        |
 |         -------                        |         -------                        |
 |         bool                           |         How funky it really is.        |
-|             How funky it really is.    |        """                             |
-|        """                             |                                        |
+|             How funky it really is.    |         """                            |
+|         """                            |                                        |
 +----------------------------------------+----------------------------------------+
 | The difference:                                                                 |
 +---------------------------------------------------------------------------------+
