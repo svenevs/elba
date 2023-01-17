@@ -1,0 +1,17 @@
+Example Module
+**************
+
+example.function_with_return_type_annotations(a, b)
+
+   A function with return type annotations
+
+   Parameters:
+      * **a** ("int") -- Integer to add
+
+      * **b** ("float") -- Float to add
+
+   Return type:
+      "float"
+
+   Returns:
+      A nice float

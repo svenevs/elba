@@ -46,8 +46,8 @@ docstrings.  This requires using Sphinx 3.0 or later.  In your ``conf.py``:
 |         Returns                        |         Returns                        |
 |         -------                        |         -------                        |
 |         bool                           |         How funky it really is.        |
-|             How funky it really is.    |        """                             |
-|        """                             |                                        |
+|             How funky it really is.    |         """                            |
+|         """                            |                                        |
 +----------------------------------------+----------------------------------------+
 | The difference:                                                                 |
 +---------------------------------------------------------------------------------+
@@ -116,6 +116,24 @@ Please feel free to raise an issue if you are having trouble, or a pull request 
 are improvements!  For example, maybe you need a way to globally adopt this style, but
 have one or two outlier functions that need the old style?  This package is a hack, I'm
 happy to find ways to help make the hack work better for you too :)
+
+Development
+----------------------------------------------------------------------------------------
+
+We keep our development pretty simple. In short, make a virtual environment, then just
+run everything in there. Here's the commands we use
+
+.. code-block:: sh
+
+   # create virtual environment
+   python3 -m venv venv
+   # activate it
+   source venv/bin/activate
+   # install elba in development mode, including the requirements
+   # for developers
+   pip install -e .[dev]
+   # run the tests
+   pytest tests
 
 License
 ----------------------------------------------------------------------------------------

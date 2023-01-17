@@ -30,7 +30,7 @@ def setup(app: "sphinx.application.Sphinx"):
             self._consume_empty()
             desc_lines = []
             while not self._is_section_break():
-                desc_lines.append(next(self._line_iter))
+                desc_lines.append(self._lines.popleft())
 
             return [("", "", desc_lines)]
 
